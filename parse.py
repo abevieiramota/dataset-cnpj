@@ -46,9 +46,9 @@ if __name__ == '__main__':
 			tipo = line[:2]
 			if tipo == '01':
 				empresa = parse_t01(line)
+				id_empresa_atual += 1
 				empresa['id'] = id_empresa_atual
 				empresas.append(empresa)
-				id_empresa_atual += 1
 			elif tipo == '02':
 				socio = parse_t02(line)
 				socio['id_empresa'] = id_empresa_atual
@@ -57,8 +57,8 @@ if __name__ == '__main__':
 				raise Exception('Valor de tipo errado. Valor: {}\nLinha: {}'.format(tipo, line))
 	
 	empresas_df = pd.DataFrame(empresas)
-	empresas_df.to_csv("empresas.csv")
+	empresas_df.to_csv("empresas.csv", index=False)
 
 	socios_df = pd.DataFrame(socios)
-	socios_df.to_csv("socios.csv")
+	socios_df.to_csv("socios.csv", index=False)
 	
